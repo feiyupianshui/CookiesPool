@@ -1,8 +1,8 @@
 # Redis数据库地址
-REDIS_HOST = ''
+REDIS_HOST = 'localhost'
 
 # Redis端口
-REDIS_PORT = 6379
+REDIS_PORT = 6666
 
 # Redis密码，如无填None
 REDIS_PASSWORD = ''

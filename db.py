@@ -1,7 +1,5 @@
 import random
-
 import redis
-
 from cookiespool.config import *
 from cookiespool.error import *
 
@@ -70,7 +68,7 @@ class RedisClient(object):
 
 
 class CookiesRedisClient(RedisClient):
-    def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD, domain='cookies', name='default'):
+    def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD, domain='cookies', name='weibo'):
         """
         管理Cookies的对象
         :param host: 地址
@@ -109,7 +107,7 @@ class CookiesRedisClient(RedisClient):
         """
         try:
             keys = self.keys()
-            return self._db.get(random.choice(keys))
+            return self._db.get(random.choice(keys))#从序列中获取一个随机元素
         except:
             raise GetRandomCookieError
 
@@ -199,7 +197,7 @@ if __name__ == '__main__':
     print(conn.keys())
     print(conn.random())
     """
-    # 测试
+    # 测试，用一个转存就测试了性能，佩服
     conn = AccountRedisClient(name='weibo')
     conn2 = AccountRedisClient(name='mweibo')
 
