@@ -6,12 +6,6 @@ from cookiespool.error import *
 
 class RedisClient(object):
     def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD):
-        """
-        初始化Redis连接
-        :param host: 地址
-        :param port: 端口
-        :param password: 密码
-        """
         if password:
             self._db = redis.Redis(host=host, port=port, password=password)
         else:
@@ -20,50 +14,21 @@ class RedisClient(object):
         self.name = REDIS_NAME
 
     def _key(self, key):
-        """
-        得到格式化的key
-        :param key: 最后一个参数key
-        :return:
-        """
         return "{domain}:{name}:{key}".format(domain=self.domain, name=self.name, key=key)
 
     def set(self, key, value):
-        """
-        设置键值对
-        :param key:
-        :param value:
-        :return:
-        """
         raise NotImplementedError
 
     def get(self, key):
-        """
-        根据键名获取键值
-        :param key:
-        :return:
-        """
         raise NotImplementedError
 
     def delete(self, key):
-        """
-        根据键名删除键值对
-        :param key:
-        :return:
-        """
         raise NotImplementedError
 
     def keys(self):
-        """
-        得到所有的键名
-        :return:
-        """
         return self._db.keys('{domain}:{name}:*'.format(domain=self.domain, name=self.name))
 
     def flush(self):
-        """
-        清空数据库, 慎用
-        :return:
-        """
         self._db.flushall()
 
 

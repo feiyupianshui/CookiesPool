@@ -16,22 +16,12 @@ from cookiespool.verify import Yundama
 
 class CookiesGenerator(object):
     def __init__(self, name='default', browser_type=DEFAULT_BROWSER):
-        """
-        父类, 初始化一些对象
-        :param name: 名称
-        :param browser: 浏览器, 若不使用浏览器则可设置为 None
-        """
         self.name = name
         self.cookies_db = CookiesRedisClient(name=self.name)
         self.account_db = AccountRedisClient(name=self.name)
         self.browser_type = browser_type
 
     def _init_browser(self, browser_type):
-        """
-        通过browser参数初始化全局浏览器供模拟登录使用
-        :param browser: 浏览器 PhantomJS/ Chrome
-        :return:
-        """
         if browser_type == 'PhantomJS':
             caps = DesiredCapabilities.PHANTOMJS
             caps[
@@ -45,11 +35,6 @@ class CookiesGenerator(object):
         raise NotImplementedError
 
     def set_cookies(self, account):
-        """
-        根据账户设置新的Cookies
-        :param account:
-        :return:
-        """
         results = self.new_cookies(account.get('username'), account.get('password'))
         if results:
             username, cookies = results
@@ -58,10 +43,6 @@ class CookiesGenerator(object):
 
 
     def run(self):
-        """
-        运行, 得到所有账户, 然后顺次模拟登录
-        :return:
-        """
         accounts = self.account_db.all()
         cookies = self.cookies_db.all()
         # Account 中对应的用户
@@ -88,11 +69,6 @@ class CookiesGenerator(object):
 
 class WeiboCookiesGenerator(CookiesGenerator):
     def __init__(self, name='weibo', browser_type=DEFAULT_BROWSER):
-        """
-        初始化操作, 微博需要声明一个云打码引用
-        :param name: 名称微博
-        :param browser: 使用的浏览器
-        """
         CookiesGenerator.__init__(self, name, browser_type)
         self.name = name
         self.ydm = Yundama(YUNDAMA_USERNAME, YUNDAMA_PASSWORD, YUNDAMA_APP_ID, YUNDAMA_APP_KEY)
@@ -114,12 +90,6 @@ class WeiboCookiesGenerator(CookiesGenerator):
                 return (username, json.dumps(cookies))
 
     def new_cookies(self, username, password):
-        """
-        生成Cookies
-        :param username: 用户名
-        :param password: 密码
-        :return: 用户名和Cookies
-        """
         print('Generating Cookies of', username)
         self.browser.delete_all_cookies()
         self.browser.get('http://my.sina.com.cn/profile/unlogin')
@@ -166,11 +136,6 @@ class WeiboCookiesGenerator(CookiesGenerator):
 
 class MWeiboCookiesGenerator(CookiesGenerator):
     def __init__(self, name='weibo', browser_type=DEFAULT_BROWSER):
-        """
-        初始化操作, 微博需要声明一个云打码引用
-        :param name: 名称微博
-        :param browser: 使用的浏览器
-        """
         CookiesGenerator.__init__(self, name, browser_type)
         self.name = name
         self.ydm = Yundama(YUNDAMA_USERNAME, YUNDAMA_PASSWORD, YUNDAMA_APP_ID, YUNDAMA_APP_KEY)
@@ -193,12 +158,6 @@ class MWeiboCookiesGenerator(CookiesGenerator):
                 return (username, json.dumps(cookies))
 
     def new_cookies(self, username, password):
-        """
-        生成Cookies
-        :param username: 用户名
-        :param password: 密码
-        :return: 用户名和Cookies
-        """
         print('Generating Cookies of', username)
         self.browser.delete_all_cookies()
         self.browser.get('http://my.sina.com.cn/profile/unlogin')
