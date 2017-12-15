@@ -34,14 +34,6 @@ class RedisClient(object):
 
 class CookiesRedisClient(RedisClient):
     def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD, domain='cookies', name='weibo'):
-        """
-        管理Cookies的对象
-        :param host: 地址
-        :param port: 端口
-        :param password: 密码
-        :param domain: 域, 如cookies, account等
-        :param name: 名称, 一般为站点名, 如 weibo, 默认 default
-        """
         RedisClient.__init__(self, host, port, password)
         self.domain = domain
         self.name = name
@@ -66,10 +58,6 @@ class CookiesRedisClient(RedisClient):
             raise DeleteCookieError
 
     def random(self):
-        """
-        随机得到一Cookies
-        :return:
-        """
         try:
             keys = self.keys()
             return self._db.get(random.choice(keys))#从序列中获取一个随机元素
@@ -77,10 +65,6 @@ class CookiesRedisClient(RedisClient):
             raise GetRandomCookieError
 
     def all(self):
-        """
-        获取所有账户, 以字典形式返回
-        :return:
-        """
         try:
             for key in self._db.keys('{domain}:{name}:*'.format(domain=self.domain, name=self.name)):
                 group = key.decode('utf-8').split(':')
