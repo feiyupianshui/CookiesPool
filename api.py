@@ -1,7 +1,7 @@
 from flask import Flask, g
 
-from cookiespool.config import *
-from cookiespool.db import *
+from .config import *
+from .db import *
 
 __all__ = ['app']
 

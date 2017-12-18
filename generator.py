@@ -9,9 +9,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from cookiespool.config import *
-from cookiespool.db import CookiesRedisClient, AccountRedisClient
-from cookiespool.verify import Yundama
+from .config import *
+from .db import CookiesRedisClient, AccountRedisClient
+from .verify import Yundama
 
 
 class CookiesGenerator(object):

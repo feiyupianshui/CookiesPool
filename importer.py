@@ -1,6 +1,6 @@
 import requests
 
-from cookiespool.db import AccountRedisClient
+from .db import AccountRedisClient
 
 conn = AccountRedisClient(name='weibo')
 
