@@ -5,11 +5,11 @@ REDIS_HOST = 'localhost'
 REDIS_PORT = 6666
 
 # Redis密码，如无填None
-REDIS_PASSWORD = ''
+REDIS_PASSWORD = 'None'
 
 # 配置信息，无需修改
-REDIS_DOMAIN = '*'
-REDIS_NAME = '*'
+REDIS_DOMAIN = 'cookies'
+REDIS_NAME = 'weibo'
 
 # 云打码相关配置到yundama.com申请注册
 YUNDAMA_USERNAME = ''
