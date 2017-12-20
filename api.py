@@ -1,7 +1,5 @@
 from flask import Flask, g
-
 from .config import *
-from .db import *
 
 __all__ = ['app']
 

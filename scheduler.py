@@ -1,10 +1,8 @@
 import time
 from multiprocessing import Process
-
 from .api import app
-from .config import *
 from .generator import *
-from .tester import *
+
 
 class Scheduler(object):
     @staticmethod

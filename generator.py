@@ -1,7 +1,6 @@
 import json
 
 import requests
-import time
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException, TimeoutException
 from selenium.webdriver import DesiredCapabilities
