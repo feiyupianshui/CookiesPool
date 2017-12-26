@@ -15,3 +15,4 @@ if response.status_code == 200:
     soup = BeautifulSoup(html, 'lxml')
     title = soup.title.string
     print(title)
+#
